@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>ONSVC</title>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webrtc-adapter/8.0.0/adapter.min.js" ></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js" ></script> 
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.3.2/spin.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
+<script type="text/javascript" src="onmeet.js"></script>
+<script type="text/javascript" src="jungle.js" ></script>
+<script type="text/javascript" src="js/rec.js"></script>
+<script>
+   $(function() {
+      $(".footer").load("../footer.html");
+   });
+</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cerulean/bootstrap.min.css" type="text/css"/>
+<link rel="stylesheet" href="../css/demo.css" type="text/css"/>
+<link rel="stylesheet" href="../css/login.css" type="text/css"/>
+<link rel="stylesheet" href="../css/config.css" type="text/css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css"/>
+<!-- <link rel="stylesheet" href="css/rtc.css"> -->
+<link rel="stylesheet" href="css/test001.css">
+<link rel="stylesheet" href="css/test002.css">
+
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Expires" content="0"/>
+</head>
+<body>
+
+<nav id="logo" class="navbar navbar-expand-md fixed-top navbar-dark bg-dark" style="min-height: 48px;">   
+    <a class="navbar-brand" style="padding-top: 8px;" href="#">
+        <img src="img/header.png" width="180" height="36" alt="">
+    </a>
+</nav>
+
+<div class="container">
+    <div class="row">
+        <div class="row">
+         <div class="container" id="details">
+            <br><br>
+                <div class="login">
+                    <h2>Log-in</h2>
+                    <div class="login_id">
+                        <h4>ID</h4>
+                        <input type="userid" name="" id="login_id" type="text" placeholder="ID" size="25" maxlength="15">
+                    </div>
+                    <div class="login_pw">
+                        <h4>Password</h4>
+                        <input type="password" name="" id="login_pw" placeholder="Password">
+                    </div>
+                    <div class="login_etc">
+                        <div class="checkbox">
+                            <input type="checkbox" name="" id=""> Remember Me?
+                        </div>
+                        <div class="forgot_pw">
+                            <a href="">Forgot Password?</a>
+                        </div>
+                    </div>
+                    <div class="submit">
+                        <input type="submit" value="submit" id="user_login">
+                    </div>
+                </div>
+         </div>
+            <div class="container hide" id="dashboard">
+                <div class="row">
+               <button class="btn btn-default btn-logout" style="margin-top: 80px; margin-right: 16px; float: right;" id="user_logout">로그아웃</button>
+               <button class="btn btn-default btn-create" style="margin-top: 80px; margin-right: 8px; float: right;" id="create_room">회의방 생성</button>
+                </div>
+            	<div class="dashboard-main">
+                    <div class="dashboard-sub dashboard-user">
+                        <div class="dashboard-content"> <!-- dashboard for friends list-->
+                            <div class="dashboard-friends" id="friend_list">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dashboard-sub dashboard-temp dashboard-room-list">
+                        <div class="dashboard-content">
+                            <div class="dashboard-rooms" id="room_list">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container share-view-container col-xs-9 hide" id="room">
+                <div class="share-view" id="screencapture"></div>
+            </div>
+			<!--conference videos appairs here -->
+            <div class="container videos-bg hide" id="videos">
+            <div class="row members" id="members"></div> <!-- test -->
+         </div>
+        </div>
+        <div class="btm-menu hide" id="btm_menu"> <!-- control btns -->
+        </div>
+    </div>
+</div>
+
+<div class="config-modal" id="configModal">
+   <div class="config-modal-content">
+      
+      <div class="config-menu-item">
+         <h3>설정</h3>
+         <div class="tab">
+            <button class="menu-btn tablinks" id="audio_cfg_btn">오디오</button>
+            <button class="menu-btn tablinks" id="video_cfg_btn">영상</button>
+         </div>
+      </div>
+
+      <div class="config-menu-content">
+         <div style="width: 100%; height: 25px;">
+            <span class="close" id="cfg_close_btn">&times;</span>
+         </div>
+         <div class="inner-content">
+            <div class="" style="display: none;" id="audio_cfg_content">
+               <div class="cfg_item">
+                  <h5>마이크</h5>
+                  <select class="select-menu" id="audio_input">
+                  </select>
+               </div>
+               <div class="cfg_item">
+                  <h5>스피커</h5>
+                  <select class="select-menu" id="audio_output">
+                  </select>
+               </div>
+                    <div class="cfg_item">
+                  <h5>음성 변조</h5>
+                        <div>
+                            <input type="radio" class="change-voice-radio" name="change_voice" value="low">
+                            <label class="change-voice-label">저음</label>
+                            <input type="radio" class="change-voice-radio" name="change_voice" value="normal" checked="checked">
+                            <label class="change-voice-label">일반</label>
+                            <input type="radio" class="change-voice-radio" name="change_voice" value="high">
+                            <label class="change-voice-label">고음</label>
+                            <input type="radio" class="change-voice-radio" name="change_voice" value="custom">
+                            <label class="change-voice-label">사용자 정의</label>
+                            <div>
+                                <input name="pitch_cfg" type="range" min="-1.0" max="1.0" step="0.1" id="audio_pitch" disabled>
+                                <div id="audio_pitch_value"></div>
+                            </div>
+                        </div>
+               </div>
+            </div>
+            <div class="" style="display: none;" id="video_cfg_content">
+               <div class="cfg_item">
+                  <h5>카메라</h5>
+                  <select class="select-menu" id="video_input">
+                  </select>
+               </div>
+               <div class="cfg_item">
+                  <h5>전송 시 해상도(최대)</h5>
+                  <select class="select-menu" id="tx_res">
+                     <option value="720">고화질(720p)</option>
+                     <option value="360" selected="selected">표준화질(360p)</option>
+                            <option value="180">저화질(180p)</option>
+                  </select>
+               </div>
+               
+               <div class="cfg_item">
+                  <h5>전송 시 대역폭 제한</h5>
+                  <select class="select-menu" id="bitrate">
+                     <option value="0">제한 없음</option>
+                     <option value="128">128kbit</option>
+                     <option value="256">256kbit</option>
+                     <option value="512">512kbit</option>
+                     <option value="1024" selected="selected">1mbit</option>
+                     <option value="1500">1.5mbit</option>
+                     <option value="2000">2mbit</option>
+                  </select>
+               </div>
+                    <div class="cfg_item">
+                  <h5>영상 필터</h5>
+                        <div>
+                            <input type="radio" class="change-voice-radio" name="video_filter" value="none" checked="checked">
+                            <label class="change-voice-label">미사용</label>
+                            <input type="radio" class="change-voice-radio" name="video_filter" value="alpha">
+                            <label class="change-voice-label">알파</label>
+                            <input type="radio" class="change-voice-radio" name="video_filter" value="mosaic">
+                            <label class="change-voice-label">모자이크</label>
+                            <div>
+                                <input name="video_filter_cfg" type="range" min="1" max="10" step="1" id="video_filter_slider">
+                                <div id="video_filter_slider_value"></div>
+                            </div>
+                        </div>
+                    </div>
+               <!-- <div class="cfg_item">
+                  <h5>수신 시 해상도(최대)</h5>
+                  <select class="select-menu">
+                     <option value="720" selected="selected">고화질(720p)</option>
+                     <option value="360">표준화질(360p)</option>
+                     <option value="360">표준화질(360p), 한번에 영상 1개 표시</option>
+                     <option value="0">오디오만</option>
+                  </select>
+               </div> -->
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+<div id = "roomcontainer">
+   <div class="config-modal" id="createRoomModal">
+      <div class="create-room-modal-content">
+         <div class="create-room-content" id="create-room-content1">
+
+         <h3 style="display:inline;">회의방 생성</h3>
+         <span class="close" id="create_room_close_btn">&times;</span>
+            <div class="inner-content">
+               <div id="create_room_content">
+                  <div class="cfg_item">
+                     <h5 style="margin-bottom:6px;">회의방 제목</h5>
+                     <input class="create-room-input" id="room_title_input" autocomplete="off">
+                     </input>
+                  </div>
+                  <div class="cfg_item">
+                     <h5 style="margin-bottom:6px;">그룹</h5>
+                     <select class="create-room-input" id="room_group_input">
+                     </select>
+                  </div>
+               </div>
+               <div class="buttom-content">
+                  <button class="btn btn-primary" id="create_room_btn" style="width: 102px;">생성</button>
+               </div>
+            </div>
+            
+         </div>
+      </div>
+   </div>
+
+   <div id="side_member_list" class="sidenav">
+      <a href="javascript:void(0)" class="closebtn" id="members_close_btn">&times;</a>
+      <div class="container" id="textroom">
+         <div class="row">
+            <div class="col-md-4" style="width: 350px;">
+               <div class="panel panel-default">
+                  <div class="panel-heading">
+                     <h3 class="panel-title">회의방 참여자</h3>
+                  </div>
+                  <div class="panel-body" style="overflow-x: auto;" id="member_list">
+                     <div id="joined_member">
+                        <h5 style="font-weight: 700;">참여 중</h5>
+                     </div>
+                     <div class="hide" id="not_joined_member">
+                        <h5 style="font-weight: 700;">미참여</h5>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+<!--
+   <div id="mySidenav" class="sidenav">
+      <a href="javascript:void(0)" class="closebtn" id="chat_close_btn">&times;</a>
+      <div class="container" id="textroom">
+         <div class="row">
+            <div class="col-md-8" style="width: 350px;">
+               <div class="panel panel-default">
+                  <div class="panel-heading">
+                     <h3 class="panel-title">회의방 메시지</h3>
+                  </div>
+                  <div class="panel-body relative" style="overflow-x: auto;" id="chatroom">
+                  </div>
+                  <div class="panel-footer">
+                     <div class="input-group margin-bottom-sm">
+                        <span class="input-group-addon"><i class="fa fa-cloud-upload fa-fw"></i></span>
+                        <input class="form-control" type="text" placeholder="Write a chatroom message" autocomplete="off" id="datasend" disabled />
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   -->
+</div>
+
+</body>
+</html>
