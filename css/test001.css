@@ -848,15 +848,55 @@ body.modal-open {
 
  /* video conference css */
 
+ .cv-caller {
+	 position: relative;
+ }
+
+ .me-name {
+	position: absolute;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 20px;
+	width: 40px;
+	top: 15px;
+	left: 30px;
+	z-index: 1020;
+}
+
+.me-name h6 {
+	font-size: 12px;
+	margin-top: 7px;
+}
+
+.me-count {
+	position: absolute;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 20px;
+	width: 100px;
+	bottom: 25px;
+	left: 30px;
+	z-index: 1020;
+}
+
+.me-count h6 {
+	font-size: 12px;
+	margin-top: 7px;
+}
+
 .cv-caller img {
-	height: 500px;
+	height: 450px;
 	width: auto;
 }
 
-.cv-callee-upper img {
-	height: 170px;	
+.cv-callee {
+	display: flex;
+	flex-wrap: wrap;
 }
 
-.cv-callee-lower img {
-	height: 125px;	
+.cv-callee img {
+	height: 200px;	
 }
+
