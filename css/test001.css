@@ -847,15 +847,30 @@ body.modal-open {
  }
 
  /* video conference css */
+ .cv-container {
+	background-color: #00000029;
+	height: 1200px;
+	width: fit-content;
+	padding: 15px;
+ }
+
 
  .cv-caller {
 	position: relative;
 	height: 650px;
+	
 	background-color: #d1cfcf;
 	box-shadow: 5px 5px 10px #00000029;
 	border: 3px solid #3C3C3CD9;
 	border-radius: 15px;
  }
+
+ @media screen and (min-width: 992px) {
+	.cv-caller {
+		width: 900px;
+		background-color: #2980B9;
+	}
+  }
 
  .cv-caller img {
 	height: 649px;
@@ -905,19 +920,18 @@ body.modal-open {
 }
 
 .cv-callee {
-	display: flex;
-	
+	display: flex;	
 }
 
 .cv-callee-vdframe {
 	position: relative;
 	height: 313px;
-	width: 400px;
+	width: 300px;
 	background: #E6E6E6 0% 0% no-repeat padding-box;
 	box-shadow: 5px 5px 10px #00000029;
 	border: 3px solid #3C3C3C;
 	border-radius: 15px;
-	margin: 5px;
+	margin: 8px;
 }
 
 .cv-callee img {
@@ -927,7 +941,6 @@ body.modal-open {
 
 .callee-header {
 /* background-color: #2980B9; */
-
 }
 
 .callee-name {
@@ -951,4 +964,18 @@ body.modal-open {
 .visually-hidden img {
 	color: white;
 	height: 20px;
+}
+
+/* video conference footer  */
+.cv-video-footer {
+	background-color: #39383E;
+	width: fit-content;
+	border-radius: 20px;
+	margin-top: 15px;
+	
+
+}
+
+.cv-btns img{
+	height: 90px;	
 }

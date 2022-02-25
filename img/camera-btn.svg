@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="108" height="108" viewBox="0 0 108 108">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset="1" stop-color="#ebebeb"/>
+    </linearGradient>
+    <filter id="Rectangle_23878" x="0" y="0" width="108" height="108" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.2"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Path_446" x="24.5" y="31.5" width="59.087" height="45.031" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-2"/>
+      <feFlood flood-opacity="0.302"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Group_18585" data-name="Group 18585" transform="translate(-708 -1081)">
+    <g transform="matrix(1, 0, 0, 1, 708, 1081)" filter="url(#Rectangle_23878)">
+      <rect id="Rectangle_23878-2" data-name="Rectangle 23878" width="90" height="90" rx="26" transform="translate(9 6)" fill="url(#linear-gradient)"/>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 708, 1081)" filter="url(#Path_446)">
+      <path id="Path_446-2" data-name="Path 446" d="M258.126,1045.218l-7.4,4.255v-4.153a3.418,3.418,0,0,0-3.424-3.412H220.462a3.418,3.418,0,0,0-3.423,3.412v20.208a3.417,3.417,0,0,0,3.423,3.411h26.844a3.418,3.418,0,0,0,3.424-3.411v-4.155l7.4,4.255Z" transform="translate(-183.54 -1004.41)" fill="#191919"/>
+    </g>
+  </g>
+</svg>
